@@ -1,0 +1,4 @@
+# From https://pytorch.org/, these currently use the 10.2 CUDA drivers (on 8/23/21).
+torch
+torchvision
+torchaudio
