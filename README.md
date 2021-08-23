@@ -11,13 +11,22 @@ The issue below persists when I instead start from an `nvidia/cuda` image (`nvid
 After installing Docker, clone this repository and run
 
 ```bash
+# This demonstrates the issue with Docker.
 docker --version
 docker build -t my-experiment .
-docker run --rm -it my-experiment nvidia-smi
-docker run --rm -it --gpus all my-experiment nvidia-smi
+docker run --rm -it my-experiment nvidia-smi  # fails
+docker run --rm -it --gpus all my-experiment nvidia-smi  # succeeds
+
+# This demonstrates the issue with Beaker.
+beaker image create --name my-experiment my-experiment
+# NOTE: Edit `beaker-conf.yaml` to set your username.
+beaker experiment create beaker-conf.yaml
+# This experiment fails for me on Beaker with the same error.
 ```
 
 ## my output
+
+Docker:
 
 ```bash
 $ docker --version
@@ -52,4 +61,17 @@ Mon Aug 23 17:35:13 2021
 |=============================================================================|
 |  No running processes found                                                 |
 +-----------------------------------------------------------------------------+
+```
+
+Beaker:
+
+```bash
+beaker image create --name my-experiment my-experiment
+# OK
+
+beaker experiment create beaker-conf.yaml
+# Experiment runs and fails with:
+# StartError: failed to create containerd task: OCI runtime create failed:
+# container_linux.go:380: starting container process caused: exec: "nvidia-smi":
+# executable file not found in $PATH: unknown
 ```
