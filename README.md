@@ -6,6 +6,18 @@ I think that `--gpus all` is now required for Docker to have access to GPUs. Thi
 
 The issue below persists when I instead start from an `nvidia/cuda` image (`nvidia/cuda:11.4.1-cudnn8-runtime-ubuntu20.04`) and then install python. I still need to pass `--gpus all` when running.
 
+## steps to reproduce
+
+After installing Docker, clone this repository and run
+
+```bash
+docker --version
+docker build -t my-experiment .
+docker run --rm -it my-experiment nvidia-smi
+docker run --rm -it --gpus all my-experiment nvidia-smi
+```
+
+## my output
 
 ```bash
 $ docker --version
