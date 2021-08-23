@@ -1,6 +1,6 @@
 # beaker-docker
 
-Testing using Docker file at https://github.com/beaker/docs/blob/main/docs/start/run.md.
+Testing using Docker file at https://github.com/beaker/docs/blob/main/docs/start/run.md, which is copied here as `Dockerfile`.
 
 I think that `--gpus all` is now required for Docker to have access to GPUs. This is causing failures when I try to run images with beaker.
 
@@ -15,7 +15,9 @@ $ docker build -t my-experiment .
 # ...
 
 $ docker run --rm -it my-experiment nvidia-smi
-docker: Error response from daemon: OCI runtime create failed: container_linux.go:380: starting container process caused: exec: "nvidia-smi": executable file not found in $PATH: unknown.
+docker: Error response from daemon: OCI runtime create failed:
+container_linux.go:380: starting container process caused: exec:
+"nvidia-smi": executable file not found in $PATH: unknown.
 
 $ docker run --rm -it --gpus all my-experiment nvidia-smi
 Mon Aug 23 17:35:13 2021
