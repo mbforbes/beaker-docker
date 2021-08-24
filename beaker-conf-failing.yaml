@@ -1,18 +1,18 @@
 version: v2-alpha
-description: Test CUDA availability and devices
+description: Test nvidia-smi
 tasks:
 # We only have one step in our experiment, so there's only one entry in this list
 - name: training
   image:
     # You will want to replace `maxf` below with your Beaker username
     beaker: maxf/my-experiment
-  arguments: [python, -u, main.py]
+  command: [nvidia-smi]
   result:
     # Beaker will capture anything that's written to this location and store it in the results
     # dataset.
     path: /output
   resources:
-    gpuCount: 1
+    gpuCount: 4
   context:
     cluster: ai2/maxf-t4
     priority: normal
